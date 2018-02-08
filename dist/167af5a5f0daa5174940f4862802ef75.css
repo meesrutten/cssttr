@@ -223,7 +223,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     margin-bottom: 1rem;
 
     color: rgb(44, 44, 44);
-    border: 1px solid rgba(0,0,0,0.5);
+    border: calc(1rem/16) solid rgba(0,0,0,0.5);
 
     transition: all 200ms ease-out;
 }
@@ -232,25 +232,25 @@ input[type="text"], input[type="email"], input[type="password"] {
 form :not([type="checkbox"]):focus:invalid {
     outline: none;
 
-    border: 2px solid rgb(255, 64, 64);
+    border: calc(1rem/8) solid rgb(255, 64, 64);
 }
 /* All form elements that not a checkbox and invalid */
 form :not([type="checkbox"]):invalid {
     outline: none;
 
-    border-bottom: 2px solid rgb(255, 64, 64);
+    border-bottom: calc(1rem/8) solid rgb(255, 64, 64);
 }
 /* All form elements that not a checkbox, focussed and valid */
 form :not([type="checkbox"]):focus:valid {
     outline: none;
 
-    border: 2px solid rgb(64, 175, 64);
+    border: calc(1rem/8) solid rgb(64, 175, 64);
 }
 /* All form elements that not a checkbox and valid */
 form :not([type="checkbox"]):valid {
     outline: none;
 
-    border-bottom: 2px solid rgb(64, 175, 64);
+    border-bottom: calc(1rem/8) solid rgb(64, 175, 64);
 }
 /* Button with a password sibling that is invalid */
 form input[type="password"]:invalid ~ [type="submit"] {
@@ -335,12 +335,12 @@ main nav:nth-of-type(2) ol li{
     margin: -2rem auto 0;
     
     background-color: rgba(0, 0, 0, .1);
-    border-left: 1px solid rgba(0, 0, 0, .25);
+    border-left: calc(1rem/16) solid rgba(0, 0, 0, .25);
 
     z-index: -1;
 }
 main nav:nth-of-type(2) ol li:last-of-type {
-    border-right: 1px solid rgba(0, 0, 0, .25);
+    border-right: calc(1rem/16) solid rgba(0, 0, 0, .25);
 }
 
 main nav:nth-of-type(2) ol li a{
