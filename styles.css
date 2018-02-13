@@ -19,7 +19,7 @@ body {
 
 
 body>ol, body>form, body>fieldset, body>nav:last-of-type, section {
-	padding: 5% 10%;
+	padding: 15vh 10%;
 }
 
 
@@ -123,13 +123,21 @@ body>article img:after {
 h1:not(body>h1) {
 	margin-bottom: 1rem;
 }
-
+p, input, label, button, textarea {
+	color: rgb(140,140,140);
+}
+input, textarea {
+	font-size: 1.1em;
+}
+textarea {
+	resize: none;
+}
 p {
 	font-size: 1.4em;
 	line-height: 1.5em;
 	letter-spacing: 0.05em;
-	color: rgb(140,140,140);
 }
+
 
 /*******/
 /* NAV */
@@ -141,8 +149,6 @@ nav h1 {
 
 nav:first-of-type {
 	position: fixed;
-	top: 0;
-	left: 0;
 	width: 100vw;
 	z-index: 99;
 }
@@ -157,7 +163,6 @@ nav:first-of-type>ul a {
 	height: 4rem;
 	padding: 0 1rem;
 }
-
 nav>ul {
 	background-color: rgb(255,255,255);
 	box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -193,7 +198,7 @@ nav ul a:after {
 	top: -1px;
 	left: 50%;
 	background-color: rgb(60, 160, 240);
-	transition: all 300ms ease;
+	transition: all 250ms ease;
 }
 nav ul a:hover:after {
 	width: 100%;
@@ -203,32 +208,88 @@ nav ul a:hover:after {
 /* NAV FORM */
 nav:first-of-type form {
 	display: grid;
-	padding: 0.3rem 10%;
+	padding: 0 10%;
 	top: -4rem;
 	position: relative;
-	float: right;
 	width: min-content;
+	float: right;
+	justify-content: center;
 	height: 100%;
-	overflow: hidden;
 	font-size: 1.2em;
-	grid-template-areas: 'user userIn check  stayin'
-                         'pass passIn login  .     '
-                         '.    .      forgot .     ';
-	grid-auto-flow: dense;
+	grid-template-areas: 'user userIn .      check stayin'
+                         'pass passIn forgot login login';
 	grid-template-columns: auto auto 0.6rem auto;
     grid-template-rows: auto auto 0;
-    grid-gap: 0.2rem 0.2rem;
-    transition: top 300ms ease 1s;
+    grid-gap: 0.2rem;
     z-index: -10;
     transition: all 250ms ease-in 1000ms;
 }
+
+
+nav:first-of-type>form label:nth-of-type(1) {
+	grid-area: user;
+}
+nav:first-of-type>form input:nth-of-type(1) {
+	grid-area: userIn;
+}
+nav:first-of-type>form input:nth-of-type(2) {
+	grid-area: check;
+}
+nav:first-of-type>form label:nth-of-type(2) {
+	grid-area: stayin;
+}
+nav:first-of-type>form label:nth-of-type(3) {
+	grid-area: pass;
+}
+nav:first-of-type>form input:nth-of-type(3) {
+	grid-area: passIn;
+}
+nav:first-of-type>form a {
+	grid-area: forgot;
+	display: block;
+	position: absolute;
+	left: 0rem;
+	top: 0rem;
+	width: 0;
+	height: 0;
+	color: transparent;
+}
+nav:first-of-type>form button {
+	display: block;
+	grid-area: login;
+
+}
+
+nav:first-of-type>form a:before {
+	visibility: visible !important;
+	display: flex;
+	content: "?";
+	justify-content: center;
+	align-items: center;
+	width: 1rem;
+	height: 1rem;
+	border: 0.05rem solid rgb(140,140,140);
+	color: rgb(140,140,140);
+}
+
+nav:first-of-type>form a {
+	grid-area: forgot;
+	display: block;
+	position: relative;
+	left: -1.7rem;
+	top: 0.15rem;
+	width: 0;
+	height: 0;
+	color: transparent;
+}
+
 nav:first-of-type form:before {
 	content: '';
 	position: fixed;
 	display: block;
 	width: 100vw;
-	height: 4rem;
 	left: 0;
+	height: 4rem;
 	background-color: rgba(248,248,248,0.98);
 	z-index: -10;
 }
@@ -239,41 +300,11 @@ nav:first-of-type:hover form, nav:first-of-type form:focus-within, nav:first-of-
 
 
 nav:first-of-type>form label, nav:first-of-type>form input, nav:first-of-type>form a, nav:first-of-type>form button {
-	color: rgb(140,140,140);
 	font-weight: 100;
 	padding: 0.1rem;
 	height: 1.6rem;
 	line-height: 1.6rem;
 	white-space: nowrap;
-}
-nav:first-of-type>form label:nth-of-type(1) {
-	grid-area: user;
-}
-nav:first-of-type>form input:nth-of-type(1) {
-	grid-area: userIn;
-}
-nav:first-of-type>form label:nth-of-type(2) {
-	grid-area: pass;
-}
-nav:first-of-type>form input:nth-of-type(2) {
-	grid-area: passIn;
-}
-nav:first-of-type>form input:nth-of-type(3) {
-	grid-area: check;
-}
-nav:first-of-type>form label:nth-of-type(3) {
-	grid-area: stayin;
-}
-nav:first-of-type>form a {
-	grid-area: forgot;
-	display: block;
-	position: relative;
-	left: -1.7rem;
-	top: -1.65rem;
-	width: 0;
-	height: 0;
-	color: transparent;
-	visibility: hidden;
 }
 nav:first-of-type>form a:before {
 	visibility: visible !important;
@@ -285,46 +316,20 @@ nav:first-of-type>form a:before {
 	height: 1rem;
 	border: 0.05rem solid rgb(140,140,140);
 	color: rgb(140,140,140);
+}
+form a, form button, form a:before, input, textarea {
 	border-radius: 0.15rem;
 }
-nav:first-of-type>form button {
-	display: block;
-	width: min-content;
-	padding: 0 1rem;
-	grid-area: login;
-
-}
-
-@media (min-width: 700px) {
-	nav:first-of-type form {
-		padding-top: 1.2rem;
-		grid-template-areas: 'user userIn pass passIn forgot login check stayin';
-		grid-template-columns: auto;
-     }
-     nav:first-of-type>form a {
-		grid-area: forgot;
-		display: block;
-		position: relative;
-		left: -1.7rem;
-		top: 0.15rem;
-		width: 0;
-		height: 0;
-		color: transparent;
-		visibility: hidden;
-	}
-}
-
 input, textarea {
 	border: 0.05rem solid rgb(140,140,140);
-	border-radius: 0.15rem;
 	background-color: transparent;
 	padding: 0 0.25rem !important;
 }
 textarea {
 	padding: 0.25rem 0.25rem !important;
 }
-form a:hover {
-	text-decoration: underline;
+form a {
+	display: none;
 }
 button, form a:before {
 	transition: background 200ms ease, color 200ms ease;
@@ -333,7 +338,7 @@ form button {
 	background-color: transparent;
 	border: 0.05rem solid rgb(140,140,140);
 	color: rgb(140,140,140);
-	border-radius: 0.15rem;
+	
 }
 button:hover, nav form a:hover:before {
 	cursor: pointer;
@@ -348,60 +353,38 @@ button:hover, nav form a:hover:before {
 /* BLOCK LINKS */
 /***************/
 
+
 section {
 	display: grid;
-	grid-template-areas: 'a b b'
-                         'a c d'
-                         'e c d'
-                         'f f g';
-	grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto auto;
-    grid-gap: 1rem;
-    align-items: stretch;
-	justify-items: stretch; 
-	grid-auto-flow: dense;
+	grid-template-columns: repeat(auto-fill,minmax(30em, 1fr));
+	grid-gap: 1rem;
 }
-@media screen and (orientation:portrait) {
-	section {
-		grid-template-areas: 'a b'
-	                         'a c'
-	                         'd c'
-	                         'e e'
-	                         'f g';
-    }
-}
-@media (max-width: 640px) {
-	section {
-		grid-template-areas: 'a'
-							 'b'
-							 'c'
-							 'd'
-							 'e'
-							 'f'
-							 'g';
-    }
-}
-section>article:nth-of-type(1) {
-	grid-area: a;
-}
-section>article:nth-of-type(2) {
-	grid-area: b;
-}
-section>article:nth-of-type(3) {
-	grid-area: c;
-}
-section>article:nth-of-type(4) {
-	grid-area: d;
-}
-section>article:nth-of-type(5) {
-	grid-area: e;
-}
-section>article:nth-of-type(6) {
-	grid-area: f;
+section>article:nth-of-type(1), section>article:nth-of-type(4) {
+	grid-column-end: span 2;
 }
 section>article:nth-of-type(7) {
-	grid-area: g;
+	grid-column-end: span 1;
 }
+@media screen and (max-width: 940px) {
+
+	section>article:nth-of-type(1), section>article:nth-of-type(4) {
+		grid-column-end: span 1;
+	}
+}
+@media screen and (max-width: 1164px) {
+	section>article:nth-of-type(7) {
+		grid-column-end: span 2;
+	}
+}
+@media screen and (max-width: 770px) {
+	section>article:nth-of-type(7) {
+		grid-column-end: span 1;
+	}
+}
+
+
+
+
 section>article {
 	display: subgrid;
 	position: relative;
@@ -415,11 +398,10 @@ section>article {
 	grid-auto-flow: dense;
 	grid-template-columns: auto auto;
     grid-template-rows: auto auto;
-    grid-gap: 0.2rem 0.4rem;
 	box-shadow: 0 0 10px rgba(0,0,0,0.1);
 	border-radius: 0.3rem;
 	overflow: hidden;
-	transition: transform 200ms ease-out 50ms;
+	transition: box-shadow 300ms ease;
 }
 a h1 {
 	font-size: 1.5em;
@@ -430,8 +412,9 @@ section img {
 	position: relative;
 	width: 100%;
 	height: auto;
-	border-radius: 0.1rem;
 	grid-area: img;
+	border-top-left-radius: 0.3rem;
+	border-top-right-radius: 0.3rem;
 }
 section h1 {
 	grid-area: h;
@@ -446,12 +429,28 @@ section img {
     filter: grayscale(60%);
     transition: filter 300ms ease;
 }
-
+section>article:hover {
+	box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
 section>article:hover img {
 	-webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 }
-
+section h1:after {
+	content: '';
+	position: relative;
+	display: block;
+	width: 0;
+	left: 50%;
+	height: 4px;
+	top: -1px;
+	background-color: rgb(60, 160, 240);
+	transition: all 250ms ease;
+}
+section h1:hover:after {
+	width: 100%;
+	left: 0%;
+}
 section a:after {
 	content: "";
 	display: block;
@@ -470,7 +469,7 @@ section a:after {
 fieldset {
 	display: block;
 	position: relative;
-	padding: 1rem;
+	padding: 1rem 1rem 2rem;
 }
 fieldset legend {
 	display: none;
@@ -491,23 +490,23 @@ svg {
 	position: relative;
 	left: calc(-1rem / 3 * 2);
 	top: -1.5rem;
-	opacity: 0.65;
+	filter: grayscale(60%);
 	transition: all 100ms ease;
 	width: 50%;
 	border-radius: 50%;
 	border: 0rem solid rgb(230,230,230);
 }
 fieldset svg:hover {
-	opacity: 1;
-	transform: scale(1.1)
+	filter: grayscale(0%);
+	transform: scale(1.15)
 }
 fieldset  input[type=radio]:active + label svg {
 	transform: scale(1);
 }
 fieldset  input[type=radio]:checked + label svg {
-	transform: scale(1.35);
-	opacity: 1;
+	transform: scale(1.4);
 	border: 0.1rem solid rgb(230,230,230);
+	filter: grayscale(0%);
 }
 
 
