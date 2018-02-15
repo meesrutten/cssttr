@@ -33,6 +33,9 @@ When I code in CSS I prefer a strict code convention.
 - CSS Variables
 - Block focus
 - Keyboard ready navigation
+- Accesskeys
+- Custom keyshortcuts
+- Accessibility menu
 
 ## Components
 
