@@ -59,8 +59,6 @@ CSS Styling standard:
     --width: 100vw;
     --height: 100vh;
 
-        /* calc( (a * a) + (b * b) = (c^2)  ) */
-
     --square: calc( calc(var(--width) * var(--width)) + calc(var(--height) * var(--height)) );
     --corner: calc(var(--square) / var(--square));
 }
@@ -95,9 +93,54 @@ body {
     padding: 0;
 }
 
-/* 
-    Accessibility menu
+/* Page scroll position indicator 
+    https://codepen.io/MadeByMike/pen/ZOrEmr
 */
+@supports (height: 100vh) {	
+	body{	
+        background-image: linear-gradient(to right top, #0089f2 50%, #FFF 50%);
+        /* Renders a half square of full page - 100vh and displays only --scroll-indicator-height of it */
+        background-size: 100% calc(100% - 100vh + .5rem);
+        background-repeat: no-repeat;
+        background-position-y: var(--header-height);
+    }
+
+	body:before{
+        content:'';
+
+        position: fixed;
+        top: calc(var(--scroll-indicator-height) + .1875rem);
+        bottom: 0;
+
+        width: 100%;
+
+        background: white;
+
+        z-index: -1;
+	}
+}
+
+/***************\
+*
+*   TITLES
+*
+\***************/
+
+h1, h2, h3, h4, h5, h6 {
+    font: var(--font-title);
+}
+
+h1 {
+    margin: 0;
+
+    font-size: var(--title-size-h1);
+}
+
+/**********************\
+*
+*   ACCESSIBILITY MENU
+*
+\**********************/
 
 [aria-label="Navigation Assistant"] {
     display: flex;
@@ -171,54 +214,11 @@ kbd {
     margin: .25rem;
 }
 
-/* Page scroll position indicator 
-    https://codepen.io/MadeByMike/pen/ZOrEmr
-*/
-@supports (height: 100vh) {	
-	body{	
-        background-image: linear-gradient(to right top, #0089f2 50%, #FFF 50%);
-        /* Renders a half square of full page - 100vh and displays only --scroll-indicator-height of it */
-        background-size: 100% calc(100% - 100vh + .5rem);
-		background-repeat: no-repeat;
-        background-position-y: var(--header-height);
-    }
-
-	body:before{
-		content:'';
-        
-        position: fixed;
-		top: calc(var(--scroll-indicator-height) + .1875rem);
-		bottom: 0;
-        
-        width: 100%;
-        
-        background: white;
-
-        z-index: -1;
-	}
-}
-
-/***************\
-*
-*   TITLES
-*
-\***************/
-
-h1, h2, h3, h4, h5, h6 {
-    font: var(--font-title);
-}
-
-h1 {
-    margin: 0;
-
-    font-size: var(--title-size-h1);
-}
-
-/***************\
+/***********\
 *
 *   HEADER
 *
-\***************/
+\***********/
 
 header{
 	position: fixed;
@@ -251,7 +251,6 @@ header h1 {
 
     opacity: 0;
     animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 3) 1 forwards show;
-
 }
 
 main {
@@ -269,10 +268,6 @@ main > *:focus-within {
     box-shadow: 0 0 .1rem .1rem rgba(1, 40, 224, .1);
 }
 
-/* @media screen and (min-width: 30rem) {
-    main {
-    }
-} */
 /***************\
 *
 *   BUTTONS OR INPUTS
@@ -304,11 +299,6 @@ button:target {
     border: 0;
 }
 
-
-img {
-    max-width: 100%;
-}
-
 /***************\
 *
 *   LOGIN FORM
@@ -323,7 +313,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     font: var(--font-stack);
     
     /* Inputs fit 30 X sized characters */
-    width: 30ex;
+    width: 30ch;
 
     padding: .2em;
     margin-bottom: 1rem;
@@ -395,15 +385,16 @@ main nav:first-of-type ul li {
 *
 \***************/
 
-
-article figure {
-    margin: 1rem 0;
-}
-
 article figure {
     max-width: 20rem;
     max-width: max-content;
     width: 80%;
+
+    margin: 1rem 0;
+}
+
+img {
+    max-width: 100%;
 }
 
 /***************\
