@@ -72,24 +72,29 @@ require = (function (modules, cache, entry) {
 })({4:[function(require,module,exports) {
 (function() {
 	const keyshortcutElements = document.querySelectorAll('[aria-keyshortcuts]')
-	
-	window.addEventListener('keydown', checkKey)
 
 	function checkKey(event){
+		const eventKey = event.key.toUpperCase()
 		const accesskeys = []
 		keyshortcutElements.forEach((elem) => {
-			const key = elem.getAttribute('accesskey').toLowerCase()
+			const key = elem.getAttribute('accesskey').toUpperCase()
 			accesskeys.push(key)
 		})
 		accesskeys.forEach( (accesskey) => {
-			if (event.ctrlKey && event.key === accesskey) {
-				const focussedElem = document.querySelector(`[accesskey="${accesskey.toUpperCase()}"]`)
+			if (   event.ctrlKey && eventKey === accesskey 
+				|| event.ctrlKey && event.altKey && eventKey === accesskey
+				|| event.altKey && eventKey === accesskey
+				|| event.altKey && event.shiftKey && eventKey === accesskey
+			   ) {
+				const focussedElem = document.querySelector(`[accesskey="${accesskey}"]`)
 				focussedElem.focus()
 			}
 		})
 	}
+
+	window.addEventListener('keydown', checkKey)
 })()
-},{}],12:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -109,7 +114,7 @@ module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
-  var ws = new WebSocket('ws://' + hostname + ':' + '51020' + '/');
+  var ws = new WebSocket('ws://' + hostname + ':' + '57681' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -210,5 +215,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[12,4])
+},{}]},{},[13,4])
 //# sourceMappingURL=/dist/1d2f829c2af70f286ddd5916d0020111.map
