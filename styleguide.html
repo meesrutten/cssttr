@@ -7,14 +7,53 @@
 
     <title>Living Styleguide</title>
 
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'"> -->
 
 </head>
 <body>
-    <header>
+    <div data-animation='first'>
+        <div></div>
+        <div></div>
+    </div>
+    <div data-animation='second'>
+        <div></div>
+        <div></div>
+    </div>
+    <div data-animation='third'>
+        <div></div>
+        <div></div>
+    </div>
+
+
+    <article aria-label="Navigation Assistant" aria-keyshortcuts="Ctrl+M" accesskey="M" tabindex="0">
+        <section aria-label="Keyboard shortcuts">
+            <h1>Accessibility menu</h1>
+            <article>
+                <h2>Quick access this menu:</h2>
+                <p>Accesskey: <kbd>M</kbd> or shortcut: <kbd>Ctrl</kbd> + <kbd>M</kbd> </p> 
+            </article>
+            <article>
+                <h2>You can navigate with</h2>
+                <p><kbd>Tabs</kbd> and
+                <kbd>←</kbd>
+                <kbd>→</kbd></p>
+            </article>
+            <article>
+                <h2>Keyboard shortcuts</h2>
+                <p>Log in form: <kbd>Ctrl</kbd> + <kbd>L</kbd> or Accesskey: <kbd>L</kbd></p>
+                <p>Navigation: <kbd>Ctrl</kbd> + <kbd>N</kbd> or Accesskey: <kbd>N</kbd></p>
+                <p>Article: <kbd>Ctrl</kbd> + <kbd>A</kbd> or Accesskey: <kbd>A</kbd></p>
+                <p>Descriptive image: <kbd>Ctrl</kbd> + <kbd>I</kbd> or Accesskey: <kbd>I</kbd></p>
+                <p>Order status: <kbd>Ctrl</kbd> + <kbd>O</kbd> or Accesskey: <kbd>O</kbd></p>
+                <p>Rating: <kbd>Ctrl</kbd> + <kbd>R</kbd> or Accesskey: <kbd>R</kbd></p>
+            </article>
+        </section>
+    </article>
+
+    <header role="banner">
         <div>
-            <h1>Living Styleguide</h1>
+            <h1>Living & Styleguide</h1>
         </div>
     </header>
 
@@ -23,7 +62,7 @@
             <form action="/" method="post">
         
                 <label for="field-email">Email</label>
-                <input type="email" id="field-email" name="field-email" autocomplete="email" required autofocus>
+                <input type="email" id="field-email" name="field-email" autocomplete="email" required accesskey="L" aria-keyshortcuts="Ctrl+L">
         
                 <label for="field-password">Password</label>
                 <input type="password" id="field-password" name="field-password" required>
@@ -41,31 +80,35 @@
 
             <h1>Main navigation</h1>
 
-            <ul>
-                <li>
-                    <a href="#main-content" aria-label="Home, current page">Home</a>
+            <ul role="menu">
+                <li role="presentation">
+                    <!-- <a href="#main-content" aria-label="Home, current page">Home</a> -->
+                    <a role="menuItem" href="#main-content" aria-current="page" accesskey="N" aria-keyshortcuts="Ctrl+N">Home</a>
                 </li>
-                <li>
-                    <a href="/products">Products</a>
+                <li role="presentation">
+                    <a href="/products" role="menuItem">Products</a>
 
                     <ul>
-                        <li>
-                            <a href="/products/rock">Rock</a>
+                        <li role="presentation">
+                            <a href="/products/rock" role="menuItem">Rock</a>
                         </li>
-                        <li>
-                            <a href="/products/paper">Paper</a>
+                        <li role="presentation">
+                            <a href="/products/paper" role="menuItem">Paper</a>
                         </li>
-                        <li>
-                            <a href="/products/scissors">Scissors</a>
+                        <li role="presentation">
+                            <a href="/products/scissors" role="menuItem">Scissors</a>
                         </li>
                     </ul>
 
                 </li>
-                <li>
-                    <a href="/about">About</a>
+                <li role="presentation">
+                    <a href="/about" role="menuItem">About</a>
                 </li>
-                <li>
-                    <a href="/contact">Contact</a>
+                <li role="presentation">
+                    <a href="./trippy.html" role="menuItem">The animation to end them all</a>
+                </li>
+                <li role="presentation">
+                    <a href="/contact" role="menuItem">Contact</a>
                 </li>
             </ul>
 
@@ -74,7 +117,7 @@
 
         <article>
             <h1>
-                <a href="/">HTML5 accessibility, are block links hurting accessibility?</a>
+                <a href="/" accesskey="A" aria-keyshortcuts="Ctrl+A">HTML5 accessibility, are block links hurting accessibility?</a>
             </h1>
 
             <img src="https://vasilis.nl/voto/fotos/klein/161001180558-de-boot-gemist-150.jpg" alt="A colorful crayon drawing on the hood of a car."
@@ -85,7 +128,7 @@
                 a link causes some Assistive Technology (AT) to misbehave.</p>
         </article>
         
-        <article>
+        <article tabindex="0" accesskey="I" aria-keyshortcuts="Ctrl+I">
             <h1>This picture has a title</h1>
             <figure>
                 <!-- Portrait -->
@@ -166,7 +209,7 @@
 
             <ol>
                 <li>
-                    <a href="/cart">Cart</a>
+                    <a href="/cart" accesskey="O" aria-keyshortcuts="Ctrl+O">Cart</a>
                 </li>
                 <li>
                     <a href="#main-content" aria-label="Address, current step">Address</a>
@@ -185,7 +228,7 @@
             <legend>Rating</legend>
         
         
-            <input type="radio" name="rating" id="rating-0">
+            <input type="radio" name="rating" id="rating-0" accesskey="R" aria-keyshortcuts="Ctrl+R">
             <label for="rating-0">
                 Sad!
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64">
@@ -260,5 +303,6 @@
         </fieldset>
 
     </main>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

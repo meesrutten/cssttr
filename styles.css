@@ -27,10 +27,18 @@ CSS Styling standard:
 \***************/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@font-face {
+    font-family: Ampersand;
+    src: local('Baskerville-Italic'),
+         local('Goudy Old Style-Italic'),
+         local('Palatino-Italic'),
+         local('Book Antiqua-Italic');
+    unicode-range: U+26;
+}
 
 :root {
     --font-stack: normal 1rem/1.5 'Lato', sans-serif;
-    --font-title: 500 2rem/1.25 'Montserrat', sans-serif;
+    --font-title: 500 2rem/1.25 Ampersand, 'Montserrat', sans-serif;
 
     /* 125/16 */
     --scroll-indicator-height: 7.8125rem; 
@@ -44,6 +52,18 @@ CSS Styling standard:
     --title-size-h1: calc(1vw + 1.5rem);
     --title-size-h2: calc(1vw + 1rem);
 
+    --transform-value: -100%;
+    /* --animation-duration: .6s; */
+    --animation-duration: .01s;
+    --animation-ease: ease-in;
+
+    --width: 100vw;
+    --height: 100vh;
+
+        /* calc( (a * a) + (b * b) = (c^2)  ) */
+
+    --square: calc( calc(var(--width) * var(--width)) + calc(var(--height) * var(--height)) );
+    --corner: calc(var(--square) / var(--square));
 }
 
 /***************\
@@ -56,17 +76,98 @@ CSS Styling standard:
     box-sizing: border-box;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
+* {
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
 }
 
-body {
+html {
     /* Sets standard font */
     font: var(--font-stack);
     font-variant: common-ligatures;
     font-synthesis: style;
 
+    color: #000;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+    Accessibility menu
+*/
+
+[aria-label="Navigation Assistant"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+        
+    background-color: rgba(0, 0, 0, .5);
+    opacity: 0;
+    filter: blur(0);
+
+    pointer-events: none;
+    z-index: 2;
+
+    transition: all 300ms ease-out;
+}
+
+[aria-label="Navigation Assistant"]:focus {
+    opacity: 1;
+}
+[aria-label="Navigation Assistant"]:focus [aria-label="Keyboard shortcuts"] {
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+[aria-label="Navigation Assistant"]:focus ~ main, [aria-label="Navigation Assistant"]:focus ~ header {
+    filter: blur(.2rem);
+}
+
+[aria-label="Keyboard shortcuts"] {
+    min-width: 20rem;
+    width: 50%;
+    max-width: 40rem;
+
+    min-height: 40rem;
+    height: 50%;
+    max-height: 80%;
+
+    padding: 2rem;
+
+    border-radius: .5rem;
+
+    background-color: #fff;
+    color: #000;
+
+    transform: scale(0);
+    transform-origin: center;
+
+    transition: transform 300ms ease-out;
+}
+
+[aria-label="Keyboard shortcuts"] h1 {
+    font-size: 2rem;
+}
+[aria-label="Keyboard shortcuts"] h2 {
+    font-size: 1.5rem;
+}
+
+kbd {
+    border: .1rem solid grey;
+    border-radius: .2rem;
+    padding: .25rem;
+    margin: .25rem;
 }
 
 /* Page scroll position indicator 
@@ -146,6 +247,10 @@ header h1 {
     margin: 0;
     
     font-size: var(--title-size-h1);
+
+    opacity: 0;
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 3) 1 forwards show;
+
 }
 
 main {
@@ -253,7 +358,7 @@ form :not([type="checkbox"]):valid {
     border-bottom: calc(1rem/8) solid rgb(64, 175, 64);
 }
 /* Button with a password sibling that is invalid */
-form input[type="password"]:invalid ~ [type="submit"] {
+form:invalid [type="submit"] {
     background-color: grey;
     border-color: darkgrey;
 
@@ -261,7 +366,7 @@ form input[type="password"]:invalid ~ [type="submit"] {
     pointer-events: none;
 }
 /* Button with a password sibling that is valid */
-form input[type="password"]:valid ~ [type="submit"] {
+form:valid [type="submit"] {
     background-color: var(--color-button);
     border-color: var(--color-button-shadow);
 
@@ -296,6 +401,7 @@ article figure {
 
 article figure {
     max-width: 20rem;
+    max-width: max-content;
     width: 80%;
 }
 
@@ -401,16 +507,152 @@ a:visited {
     color: var(--color-link);
 }
 
-@keyframes initialAnimation{
+/*  */
+
+@keyframes show {
     from {
-        transform-origin: top;
-        transform: scale(0.9);
         opacity: 0;
-        transition: opacity 300ms ease-out, transform 500ms ease-out;
+        transform: translateY(-2em);
     }
     to {
-        transform: scale(1);
         opacity: 1;
-        transition: none;
+        transform: translateY(0);
     }
+}
+
+@keyframes initialAnimation-horizontal {
+    from {
+        transform: translateX(0)
+    }
+    to {
+        transform: translateX(var(--transform-value));
+    }
+}
+@keyframes initialAnimation-vertical {
+    from {
+        transform: translateY(0)
+    }
+    to {
+        transform: translateY(var(--transform-value));
+    }
+}
+
+[data-animation] div:first-child, [data-animation] div:last-child {
+    position: fixed;
+
+    background-image: linear-gradient(-45deg, hsla(0,0%,0%,0), hsla(0,0%,0%,.05) );
+    background-size: .3em;
+
+    border: .25em solid hsla(0,0%,35%, 1);
+}
+
+[data-animation*='first'] div:first-child, [data-animation*='first'] div:last-child {
+    width: 50vw;
+    height: 100vh;
+
+    top: 0;
+
+    background: linear-gradient(to right, #a90329 0%,#a90329 6%,#6d0019 10%,#a90329 14%,#a90329 20%,#6d0019 24%,#a90329 28%,#a90329 34%,#6d0019 38%,#a90329 42%,#a90329 48%,#6d0019 52%,#a90329 56%,#a90329 62%,#6d0019 66%,#a90329 70%,#a90329 76%,#6d0019 80%,#a90329 84%,#a90329 90%,#6d0019 94%,#a90329 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    z-index: 123456;
+}
+
+[data-animation*='first'] div:first-child {
+    left: 0;
+
+    border: none;
+    border-right: .25em solid #a90329;
+
+    animation: var(--animation-duration) var(--animation-ease) var(--animation-duration) 1 forwards initialAnimation-horizontal;
+}
+[data-animation*='first'] div:last-child {
+    right: 0;
+
+    border: none;
+    border-left: .25em solid #a90329;
+
+    --transform-value: 100%;
+    animation: var(--animation-duration) var(--animation-ease) var(--animation-duration) 1 forwards initialAnimation-horizontal;
+}
+
+[data-animation*='second'] div:first-child, [data-animation*='second'] div:last-child {
+    width: 100vw;
+    height: 50vh;
+
+    background-color: hsla(0,0%,40%,1);  
+
+    z-index: 12345;
+}
+
+[data-animation*='second'] div:first-child {
+    top: 0;
+    
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 2) 1 forwards initialAnimation-vertical;
+}
+[data-animation*='second'] div:last-child {
+    bottom: 0;
+
+    --transform-value: 100%;
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 2) 1 forwards initialAnimation-vertical;
+}
+
+[data-animation*='third'] div:first-child, [data-animation*='third'] div:last-child {
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: transparent;  
+    background-size: cover;
+
+    border: 0;
+
+    z-index: 1234;
+}
+
+[data-animation*='third'] div:first-child {
+    left: 0;
+    transform-origin: top right;
+
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0) 49.9%,hsla(0,0%,40%,1) 1%, hsla(0,0%,50%,1) 50%);
+
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 3) 1 forwards initialAnimation-horizontal;
+}
+[data-animation*='third'] div:last-child {
+    right: 0;
+    transform-origin: top left;
+
+    background-image: linear-gradient(-45deg, hsla(0,0%,50%,1) 49.9%, hsla(0,0%,40%,1) 1%,  rgba(0, 0, 0, 0) 50%);
+
+    --transform-value: 100%;
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 3) 1 forwards initialAnimation-horizontal;
+}
+
+a[href*=".html"] {
+    color: green;
+    text-decoration: green wavy underline; 
+}
+
+main > * {
+    opacity: 0;
+    transform: translateY(-1em);
+}
+
+main > :nth-child(1) {
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 5.25) 1 forwards show;
+}
+main > :nth-child(2) {
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 5) 1 forwards show;
+}
+main > :nth-child(3) {
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4.75) 1 forwards show;
+}
+main > :nth-child(4) {
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4.5) 1 forwards show;
+}
+main > :nth-child(5) {
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4.25) 1 forwards show;
+}
+main > :nth-child(6) {
+    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4) 1 forwards show;
 }

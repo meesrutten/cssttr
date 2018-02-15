@@ -1,0 +1,318 @@
+/* Inspired by
+https://codepen.io/peterwestendorp/pen/wGECk
+*/
+:root {
+    --sphere-animation-delay: .1s;
+    --sphere-rotation: 4deg;
+}
+
+@keyframes roundandround {
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes roundandround {
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+    background-color: #000;
+}
+
+@keyframes roundandround {
+  to {
+    transform:  rotateY(360deg);
+  }
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+
+.scene {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37.5em;
+    height:37.5em;
+    margin:2% auto;
+    perspective: 16em;
+}
+.wrapper {
+    width:100%;
+    height:100%;
+    transform: rotateX(45deg)  rotateY(45deg);
+    transform-style: preserve-3d;
+}
+.ball {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin:0 auto;
+    transform-style: preserve-3d;
+    animation: roundandround 30s 1.3s infinite linear;
+}
+.ball .ring {
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0.625em;
+    border-style: solid;
+    border-radius: 50%;
+    opacity: 0;
+    animation: show 0.75s forwards ease-in-out;
+}
+
+.ring:nth-child(1) {
+  color:#8df435;
+  transform: rotateY( calc( var(--sphere-rotation) * 1 ) );
+  animation-delay: calc( var(--sphere-animation-delay) * 0 );
+}
+.ring:nth-child(2) {
+  color:#a8e526;
+  transform: rotateY(calc( var(--sphere-rotation) * 2 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 1 );
+}
+.ring:nth-child(3) {
+  color:#c2d11c;
+  transform: rotateY(calc( var(--sphere-rotation) * 3 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 2 );
+}
+.ring:nth-child(4) {
+  color:#c8cb1b;
+  transform: rotateY(calc( var(--sphere-rotation) * 4 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 3 );
+}
+.ring:nth-child(5) {
+  color:#deb21a;
+  transform: rotateY(calc( var(--sphere-rotation) * 5 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 4 );
+}
+.ring:nth-child(6) {
+  color:#ef9621;
+  transform: rotateY(calc( var(--sphere-rotation) * 6 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 5 );
+}
+.ring:nth-child(7) {
+  color:#f29122;
+  transform: rotateY(calc( var(--sphere-rotation) * 7 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 6 );
+}
+.ring:nth-child(8) {
+  color:#fb7430;
+  transform: rotateY(calc( var(--sphere-rotation) * 8 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 7 );
+}
+.ring:nth-child(9) {
+  color:#fe5944;
+  transform: rotateY(calc( var(--sphere-rotation) * 9 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 8 );
+}
+.ring:nth-child(10) {
+  color:#fe5548;
+  transform: rotateY(calc( var(--sphere-rotation) * 10 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 9);
+}
+.ring:nth-child(11) {
+  color:#f83d61;
+  transform: rotateY(calc( var(--sphere-rotation) * 11 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 10);
+}
+.ring:nth-child(12) {
+  color:#ec2b7d;
+  transform: rotateY(calc( var(--sphere-rotation) * 12 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 11);
+}
+.ring:nth-child(13) {
+  color:#e82983;
+  transform: rotateY(calc( var(--sphere-rotation) * 13 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 12);
+}
+.ring:nth-child(14) {
+  color:#d41e9f;
+  transform: rotateY(calc( var(--sphere-rotation) * 14 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 13);
+}
+.ring:nth-child(15) {
+  color:#bd1aba;
+  transform: rotateY(calc( var(--sphere-rotation) * 15 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 14);
+}
+.ring:nth-child(16) {
+  color:#b81ac0;
+  transform: rotateY(calc( var(--sphere-rotation) * 16 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 15);
+}
+.ring:nth-child(17) {
+  color:#9c1fd7;
+  transform: rotateY(calc( var(--sphere-rotation) * 17 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 16);
+}
+.ring:nth-child(18) {
+  color:#802aea;
+  transform: rotateY(calc( var(--sphere-rotation) * 18 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 17);
+}
+.ring:nth-child(19) {
+  color:#7a2dee;
+  transform: rotateY(calc( var(--sphere-rotation) * 19 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 18);
+}
+.ring:nth-child(20) {
+  color:#5f40f9;
+  transform: rotateY(calc( var(--sphere-rotation) * 20 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 19);
+}
+.ring:nth-child(21) {
+  color:#4657fe;
+  transform: rotateY(calc( var(--sphere-rotation) * 21 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 20);
+}
+.ring:nth-child(22) {
+  color:#425cfe;
+  transform: rotateY(calc( var(--sphere-rotation) * 22 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 21);
+}
+.ring:nth-child(23) {
+  color:#2f77fb;
+  transform: rotateY(calc( var(--sphere-rotation) * 23 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 22);
+}
+
+
+
+.ring:nth-child(24) {
+  color:#1c6bff;
+  transform: rotateY(calc( var(--sphere-rotation) * 24 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 21);
+}
+.ring:nth-child(25) {
+  color:#0f63ff;
+  transform: rotateY(calc( var(--sphere-rotation) * 25 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 20);
+}
+.ring:nth-child(26) {
+  color:#2fa9fb;
+  transform: rotateY(calc( var(--sphere-rotation) * 26 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 19);
+}
+.ring:nth-child(27) {
+  color:#1ca3fd;
+  transform: rotateY(calc( var(--sphere-rotation) * 27 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 18);
+}
+.ring:nth-child(28) {
+  color:#0099ff;
+  transform: rotateY(calc( var(--sphere-rotation) * 28 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 17);
+}
+.ring:nth-child(29) {
+  color:#3ee2ff;
+  transform: rotateY(calc( var(--sphere-rotation) * 29 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 16);
+}
+.ring:nth-child(30) {
+  color:#31e0ff;
+  transform: rotateY(calc( var(--sphere-rotation) * 30 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 15);
+}
+.ring:nth-child(31) {
+  color:#19ddff;
+  transform: rotateY(calc( var(--sphere-rotation) * 31 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 14);
+}
+.ring:nth-child(32) {
+  color:#19fff3;
+  transform: rotateY(calc( var(--sphere-rotation) * 32 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 13);
+}
+.ring:nth-child(33) {
+  color:#19ffba;
+  transform: rotateY(calc( var(--sphere-rotation) * 33 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 12);
+}
+.ring:nth-child(34) {
+  color:#19ff94;
+  transform: rotateY(calc( var(--sphere-rotation) * 34 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 11);
+}
+.ring:nth-child(35) {
+  color:#19ff66;
+  transform: rotateY(calc( var(--sphere-rotation) * 35 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 10);
+}
+.ring:nth-child(36) {
+  color:#19ff4b;
+  transform: rotateY(calc( var(--sphere-rotation) * 36 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 9);
+}
+.ring:nth-child(37) {
+  color:#19ff24;
+  transform: rotateY(calc( var(--sphere-rotation) * 37 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 8);
+}
+.ring:nth-child(38) {
+  color:#3fff19;
+  transform: rotateY(calc( var(--sphere-rotation) * 38 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 7);
+}
+.ring:nth-child(39) {
+  color:#75ff19;
+  transform: rotateY(calc( var(--sphere-rotation) * 39 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 6);
+}
+.ring:nth-child(40) {
+  color:#aeff19;
+  transform: rotateY(calc( var(--sphere-rotation) * 40 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 5);
+}
+.ring:nth-child(41) {
+  color:#cdff19;
+  transform: rotateY(calc( var(--sphere-rotation) * 41 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 4);
+}
+.ring:nth-child(42) {
+  color:#f0ff19;
+  transform: rotateY(calc( var(--sphere-rotation) * 42 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 3);
+}
+.ring:nth-child(43) {
+  color:#fff019;
+  transform: rotateY(calc( var(--sphere-rotation) * 43 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 2);
+}
+.ring:nth-child(44) {
+  color:#ffc919;
+  transform: rotateY(calc( var(--sphere-rotation) * 44 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 1);
+}
+.ring:nth-child(45) {
+  color:#ffa319;
+  transform: rotateY(calc( var(--sphere-rotation) * 45 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 0);
+}
+.ring:nth-child(46) {
+  color:#ff9419;
+  transform: rotateY(calc( var(--sphere-rotation) * 46 ));
+  animation-delay: calc( var(--sphere-animation-delay)* 0);
+}
