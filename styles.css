@@ -1,3 +1,8 @@
+
+/********/
+/* INIT */
+/********/
+
 * {
 	margin: 0;
 	padding: 0;
@@ -13,21 +18,20 @@ body,html {
 }
 body {
 	font-size: 62.5%;
+	font-weight: 400;
 	font-family: 'Ubuntu';
 	-webkit-font-smoothing: antialiased;
 }
-
-
 body>ol, body>form, body>fieldset, body>nav:last-of-type, section {
 	padding: 15vh 10%;
 }
-
-
+:focus {
+	outline: 0;
+}
 
 /*******************/
 /* INLINE ELEMENTS */
 /*******************/
-
 
 h1 {
 	font-weight: 400;
@@ -36,19 +40,22 @@ h1 {
 p, input, label, button, textarea {
 	color: rgb(140,140,140);
 }
-input, textarea {
-	font-size: 1.1em;
-}
 
+label, button, input, textarea {
+	display: block;
+	font-size: 1.3em !important;
+	line-height: 1.4em;
+	letter-spacing: 0.05em;
+}
 p {
-	font-size: 1.4em;
-	line-height: 1.5em;
+	font-size: 1.5em;
+	line-height: 1.6em;
 	letter-spacing: 0.05em;
 }
 
 
 /**********/
-/* LOADER */
+/* loader */
 /**********/
 
 body>div {
@@ -72,14 +79,13 @@ body>div {
     	z-index: -99;
     }
 }
-
 body>div div {
 	display: flex;
 	align-items: flex-end;
 	height: 0;
 	padding: 2rem;
 }
-body>div span {
+body>div span, body>div span:before, body>div span:after {
 	display: inline-block;
 	width: 0.75rem;
 	height: 0rem;
@@ -88,7 +94,6 @@ body>div span {
 	background-color: rgb(60, 160, 240);
 	animation: loader 0.3s ease-in-out infinite alternate;
 }
-
 body>div span:nth-of-type(2) {
 	animation-delay: 0.1s
 }
@@ -98,25 +103,18 @@ body>div span:nth-of-type(3) {
 @keyframes loader {
     from { 
     	height: 0.5rem; 
+    	width: 0.75rem;
     }
     to {
     	margin-bottom: -0.25rem;
     	height: 3rem;
+    	width: 1rem;
     }
 }
 
-
-
-
-
-
-
-
-
-
-/*************/
-/* BIG IMAGE */
-/*************/
+/********/
+/* HERO */
+/********/
 
 
 body>article {
@@ -157,8 +155,8 @@ article figcaption {
 	display: block;
 	width: 40%;
 	z-index: 20;
-
 }
+
 body>article h1, article figcaption p, article footer, article time, article figcaption a {
 	color: rgb(255,255,255);
 }
@@ -185,6 +183,7 @@ article footer:before {
 	}
 	body>article figure:last-of-type {
 		background-image: url('img/wintersport.jpg');
+		filter: blur(0.25rem);
 	}
 }
 @media screen and (orientation:landscape) {
@@ -192,7 +191,24 @@ article footer:before {
 		background-image: url('img/surf.jpg');
 	}
 }
-
+figcaption a {
+	display: inline-block;
+}
+figcaption a:after {
+	content: '';
+	position: relative;
+	display: block;
+	width: 0;
+	height: 1px;
+	top: 1px;
+	left: 50%;
+	background-color: rgb(255, 255, 255);
+	transition: all 200ms ease;
+}
+figcaption a:hover:after, figcaption a:focus:after {
+	width: 100%;
+	left: 0;
+}
 body>article img:after {
 	content: "";
 	display: block;
@@ -230,6 +246,7 @@ nav:first-of-type>ul a {
 	line-height: 4rem;
 	height: 4rem;
 	padding: 0 1rem;
+	transition: all 200ms ease;
 }
 nav>ul {
 	background-color: rgb(255,255,255);
@@ -238,9 +255,7 @@ nav>ul {
 	margin-left: -1rem;
 }
 
-
-/* SUB NAV */
-
+/* SUBNAV */
 
 li ul {
 	position: absolute;
@@ -253,14 +268,17 @@ li ul {
 	border-bottom-left-radius: 0.25rem;
 	border-bottom-right-radius: 0.25rem;
 }
-li:hover>ul, li ul:focus-within {
+li:hover>ul, li>ul:focus-within, nav li:nth-of-type(2)>a:focus + ul {
 	height: 4rem;
 	transition: height 250ms ease-out 100ms;
 }
 li ul li {
 	display: block;
 }
-
+nav ul a:focus {
+	background-color: rgb(60, 160, 240);
+	color: rgb(255,255,255);
+}
 nav ul a:after {
 	content: '';
 	position: relative;
@@ -272,15 +290,32 @@ nav ul a:after {
 	background-color: rgb(60, 160, 240);
 	transition: all 200ms ease;
 }
+nav ul a:focus:after {
+	background-color: rgb(255,255,255);
+}
 nav ul a:hover:after {
 	width: 100%;
 	left: 0%;
 }
 
+/* NAV LOGIN FORM */
 
-
-/* NAV FORM */
-
+nav:first-of-type:after {
+	content: 'Login';
+	position: absolute;
+	display: block;
+	float: left;
+	right: 10%;
+	top: 0;
+	line-height: 4rem;
+	z-index: 99;
+	color: rgb(120,120,120);
+	font-size: 1.2em;
+	padding: 0 1rem;
+}
+nav:first-of-type:hover:after {
+	cursor: pointer;
+}
 nav:first-of-type form {
 	display: flex;
 	position: relative;
@@ -291,25 +326,21 @@ nav:first-of-type form {
 	padding: 0 10%;
 	overflow: hidden;
 	width: 100%;
-	font-size: 1.2em;
     z-index: -10;
     transition: top 400ms ease-in 1000ms, height 400ms ease-in 1000ms;
     background-color: rgb(248,248,248);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 nav:first-of-type:hover form, nav:first-of-type form:focus-within, nav:first-of-type ul:focus-within + form {
 	top: 0;
 	transition: top 300ms ease-out, height 300ms ease-out;
 	height: 4rem;
 }
-
-
 nav:first-of-type>form button {
 	display: block;
 	padding: 0 1rem;
+	margin-right: 0.5rem;
 }
-
 nav:first-of-type>form a {
 	display: block;
 	position: relative;
@@ -320,6 +351,7 @@ nav:first-of-type>form a:before {
 	visibility: visible !important;
 	display: flex;
 	content: "?";
+	font-weight: 500;
 	justify-content: center;
 	align-items: center;
 	width: 1rem;
@@ -330,15 +362,12 @@ nav:first-of-type>form a:before {
 	border: 0.05rem solid rgb(140,140,140);
 	color: rgb(140,140,140);
 }
-
-
 nav:first-of-type>form label, nav:first-of-type>form input, nav:first-of-type>form a, nav:first-of-type>form button {
 	font-weight: 100;
 	height: 1.6rem;
 	line-height: 1.6rem;
 	white-space: nowrap;
 }
-
 nav:first-of-type ul input {
 	display: none;
 }
@@ -349,11 +378,11 @@ form a, form button, form a:before, input, textarea {
 input, textarea {
 	border: 0.05rem solid rgb(140,140,140);
 	background-color: transparent;
-	padding: 0 0.25rem !important;
+	padding: 0.2rem 0.3rem;
 }
 textarea {
 	resize: none;
-	padding: 0.25rem 0.25rem !important;
+	padding: 0.5rem 0.5rem;
 }
 form a {
 	display: none;
@@ -367,13 +396,12 @@ form button {
 	color: rgb(140,140,140);
 	
 }
-button:hover, nav form a:hover:before {
+button:hover, button:focus, nav form a:hover:before, nav form a:focus:before {
 	cursor: pointer;
 	background-color: rgb(60, 160, 240);
 	border-color: rgb(60, 160, 240);
 	color: rgb(255,255,255) !important;
 }
-
 @media screen and (max-width: 800px) {
 	nav:first-of-type form {
 		display: grid;
@@ -406,15 +434,76 @@ button:hover, nav form a:hover:before {
 	}
 	nav:first-of-type>form button {
 		grid-area: login;
-
 	}
 	nav:first-of-type>form a:before {
 		top: 0.45rem;
 		left: -1.1rem;
 	}
 }
-
-
+nav:first-of-type form input:first-of-type(2) {
+	margin-right: 0.5rem;
+}
+nav input, textarea {
+	transition: all 150ms ease;
+}
+nav input:hover, textarea:hover {
+	border-color: rgb(60, 160, 240);
+	box-shadow: 0 0 0 1px rgb(60, 160, 240);
+	transform: scaleY(1.1);
+}
+nav input:active, textarea:active {
+	transform: scaleY(1);
+}
+nav input[type="checkbox"] {
+	border-color: transparent;
+	box-shadow: 0 0 0 0 transparent;
+}
+nav input:focus, textarea:focus {
+	background-color: rgb(60, 160, 240);
+	color: rgb(255,255,255);
+	border-color: rgb(60, 160, 240);
+	font-weight: 400 !important;
+}
+nav input:nth-of-type(2):focus + a:before {
+	border: 1px solid rgb(255,255,255);
+	color: rgb(255,255,255);
+}
+nav input:last-of-type {
+	margin-right: 0.5rem;
+}
+nav input:last-of-type:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	margin-top: 0.2rem;
+	margin-left: -0.25rem;
+	border-radius: 0.15rem;
+	border: 1px solid rgb(140,140,140);
+	transition: all 100ms ease;
+	color: rgb(255,255,255);
+	text-align: center;
+	font-weight: 600;
+	background-color: rgb(248,248,248);
+	transition: all 150ms ease;
+}
+nav input:last-of-type:checked:after {
+	content: '\2713';
+	line-height: 1rem;
+	background-color: rgb(60, 160, 240);
+	border-color: rgb(60, 160, 240);
+}
+nav input:last-of-type:focus, nav input:last-of-type:hover {
+	outline: 0 !important;
+	box-shadow: 0 !important;
+}
+nav input:focus:after, nav input:hover:after {
+	color: rgb(255,255,255);
+	border-color: rgb(60, 160, 240);
+	font-weight: 400 !important;
+	box-shadow: 0 0 0 1px rgb(60, 160, 240);
+}
 
 /***************/
 /* BLOCK LINKS */
@@ -443,7 +532,6 @@ section>article:nth-of-type(7) {
 	grid-column-end: span 1;
 }
 @media screen and (max-width: 940px) {
-
 	section>article:nth-of-type(1), section>article:nth-of-type(4) {
 		grid-column-end: span 1;
 	}
@@ -458,10 +546,6 @@ section>article:nth-of-type(7) {
 		grid-column-end: span 1;
 	}
 }
-
-
-
-
 section>article {
 	display: subgrid;
 	position: relative;
@@ -475,15 +559,20 @@ section>article {
 	grid-auto-flow: dense;
 	grid-template-columns: auto auto;
     grid-template-rows: auto auto;
-	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	box-shadow: 0 0 10px rgb(225,225,225);
 	border-radius: 0.3rem;
 	overflow: hidden;
-	transition: box-shadow 300ms ease;
+	transition: box-shadow 300ms ease, transform 200ms ease;
+	transform: scale(1);
+	transform-origin: center 70%;
+}
+section>article:hover, section>article:focus-within {
+	box-shadow: 0 0 20px rgb(200,200,200);
+	transform: scale(1.01);
 }
 a h1 {
 	font-size: 1.5em;
 }
-
 section img {
 	display: block;
 	position: relative;
@@ -492,6 +581,7 @@ section img {
 	grid-area: img;
 	border-top-left-radius: 0.3rem;
 	border-top-right-radius: 0.3rem;
+	transition: filter 300ms ease;
 }
 section h1 {
 	grid-area: h;
@@ -500,16 +590,6 @@ section h1 {
 section p {
 	grid-area: p;
 	padding: 0.5rem 2rem 2rem 2rem;
-}
-section img {
-    /*filter: grayscale(75%);*/
-    transition: filter 300ms ease;
-}
-section>article:hover {
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-section>article:hover img {
-    /*filter: grayscale(0%);*/
 }
 section a:before {
 	content: '';
@@ -521,7 +601,7 @@ section a:before {
 	background-color: rgb(60, 160, 240);
 	transition: width 250ms ease, left 250ms ease;
 }
-section a:hover:before {
+section article:focus-within a:before, section a:hover:before {
 	width: 100%;
 	left: 0%;
 }
@@ -534,7 +614,10 @@ section a:after {
 	left: 0;
 	top: 0;
 }
-
+section a:focus {
+	outline: none;
+	box-shadow: none;
+}
 
 /**********/
 /* RATING */
@@ -571,16 +654,17 @@ svg {
 	transition: all 100ms ease;
 	transform-origin: center;
 	overflow: visible !important;
-	filter: grayscale(50%);
+	filter: grayscale(65%);
 }
 
-fieldset svg:hover {
+fieldset svg:hover, fieldset input:focus + label svg {
 	filter: grayscale(0%);
-	transform: scale(1.2)
+	transform: scale(1.2);
+	border: 0.1rem solid rgb(200,200,200);
 }
 
 fieldset input[type=radio] {
-	border: 0.1rem solid rgba(60,160,240,0);
+	border: 0.1rem solid transparent;
 }
 fieldset input[type=radio]:active + label svg {
 	transform: scale(1);
@@ -589,17 +673,16 @@ fieldset input[type=radio]:checked + label svg {
 	transform: scale(1.4);
 	border: 0.1rem solid rgba(60,160,240,1);
 	filter: grayscale(0%);
-
 }
 
-fieldset input[type=radio]:nth-of-type(n+2):after {
+fieldset input[type=radio]:after {
 	content: "";
 	display: block;
-	position: relative;
+	position: absolute;
 	width: 2rem;
 	height: 2rem;
-	left: -0.65rem;
-	top: -0.22rem;
+	left: -0.625rem;
+	top: -0.4rem;
 	background-image: url('img/sunglass.png');
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -609,13 +692,14 @@ fieldset input[type=radio]:nth-of-type(n+2):after {
 	transform-origin: center 30%;
 }
 fieldset input[type=radio]:nth-of-type(1):after {
-	top: -0.14rem;
+	background-image: url('img/poop.png');
+	top: -2.3rem;
 }
 fieldset input[type=radio]:nth-of-type(2):after {
 	transform: scale(0) rotate(-5deg);
 }
 fieldset input[type=radio]:nth-of-type(4):after {
-	top: -0.35rem;
+	top: -0.575rem;
 }
 fieldset input[type=radio]:checked:after {
 	transform: scale(1)
@@ -631,18 +715,17 @@ fieldset label:first-of-type:hover svg g path:first-of-type {
 	transform: translateX(0.25rem) translateY(-0.1rem);
 }
 fieldset label:first-of-type svg>path:first-of-type {
-	transform: scaleY(0.5);	
+	transform: scaleY(0.4);	
 	transform-origin: center 70%;
 }
 fieldset input[type=radio]:checked + label:first-of-type svg>path:first-of-type {
-	transform: scaleY(1);
+	transform: scaleY(1.2);
 }
 
 
 /********/
 /* CHAT */
 /********/
-
 
 body>ol {
 	display: block;
@@ -652,11 +735,6 @@ body>ol {
 	justify-content: center;
 	flex-direction: column;
 	background-color: rgb(250,250,250);
-	background: rgba(60, 160, 240, 0.2); background-image:
-    linear-gradient(90deg, rgba(60, 160, 240, 0.05) 11px, transparent 0),
-    linear-gradient(90deg, rgba(60, 160, 240, 0.15) 23px, transparent 0),
-    linear-gradient(90deg, rgba(60, 160, 240, 0.1) 41px, transparent 0);
-	background-size: 41px 100%, 61px 100%, 83px 100%;
 }
 body>ol li {
 	display: block;
@@ -665,13 +743,17 @@ body>ol li {
 	padding: 1rem;
 	background-color: rgb(60, 160, 240);
 	border-radius: 0.5rem;
-	transition: transform 200ms ease-out 50ms, box-shadow 200ms ease-out 50ms;
+	transition: transform 200ms ease-out 50ms, box-shadow 200ms ease-out 50ms, width 300ms ease;
 	box-shadow: 0 0 0px rgba(0,0,0,0);
 }
 body>ol li:hover {
 	transform: scale(1.01);
-	transition: transform 125ms ease-out, box-shadow 125ms ease-out;
+	width: 49%;
+	transition: transform 100ms ease-out, box-shadow 100ms ease-out, width 300ms ease;
 	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+body>ol li:nth-of-type(even):hover {
+	box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 body>ol li:hover:after {
 	top: calc(102% / 3 - 0.5rem);
@@ -680,7 +762,7 @@ body>ol li:hover:after {
 body>ol li:nth-of-type(even) {
 	align-self: flex-end;
 	text-align: right;
-	background-color: rgba(60, 160, 240,0.8);
+	background-color: rgb(230, 230, 230);
 }
 body>ol li:after {
 	content: '';
@@ -698,7 +780,7 @@ body>ol li:nth-of-type(odd):after {
 }
 body>ol li:nth-of-type(even):after {
 	right: -0.5rem;
-	border-left: 0.5rem solid rgba(60, 160, 240,0.8);
+	border-left: 0.5rem solid rgb(230, 230, 230);
 	border-top: 0.5rem solid transparent;
   	border-bottom: 0.5rem solid transparent;
 }
@@ -707,7 +789,9 @@ body>ol p {
 	color: rgb(255,255,255);
 }
 
-
+body>ol li:nth-of-type(even) p, body>ol li:nth-of-type(even) time {
+	color: rgb(60,60,60) !important;
+}
 body>ol footer {
 	display: block;
 	position: relative;
@@ -754,49 +838,82 @@ body>ol form textarea, body>ol form button {
 	height: 3rem;
 }
 body>ol form textarea {
-	width: 94%;
-	margin-right: 1%;
+	width: calc(100% - 5rem);
+	margin-right: 0.5rem;
 }
 body>ol form button {
-	width: 5%;
+	width: 4.5rem;
 }
-
-
+/****************/
+/* FINISH ORDER */
+/****************/
 
 
 progress[value] {
 	width: 80%;
 	-webkit-appearance: none;
-	height: 1.5rem;
+	height: 2rem;
 	position: absolute;
 	z-index: -1;
 }
 progress[value]::-webkit-progress-bar {
 	background-color: rgb(248,248,248);
-	border-radius: 0.75rem;
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) inset;
+	border-radius: 0.3rem;
+	box-shadow: 0 0 1px rgb(160, 160, 160) inset;
 	overflow: hidden;
 }
 progress[value]::-webkit-progress-value {
-	background-color: rgb(60,160,240);
-}
+	/*background: linear-gradient( 60deg, rgb(60,160,240) 0%, rgb(200,160,240) 100%),
+				linear-gradient(top, rgba(255, 255, 255, .25), rgba(0, 0, 0, .25));
+	background-size: 80px 100%;*/
+	background-image: 
+		-webkit-linear-gradient(-45deg,
+	                           transparent 0%, rgba(0, 0, 0, .1) 33%,
+	                           rgba(0,0, 0, .1) 50%, transparent 66%),
+	    -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	    -webkit-linear-gradient(left, rgb(60,160,240), rgb(200,160,240));
+    border-radius: 2px;
+    background-size: 35px 2rem, 100% 100%, 100% 100%;
+	animation: progressAnim 0.5s ease infinite 1s;
 
+}
+@keyframes progressAnim {
+    to {
+    	background: linear-gradient( 180deg, rgb(60,160,240) 50%, rgb(200,160,240) 100%); 
+    }
+}
 nav:last-of-type ol {
 	display: flex;
-	/*width: calc(50% / 3 + 60%);*/
 	justify-content: space-around;
 	font-size: 1.4em;
-	line-height: 1.5rem;
-
+	line-height: 2rem;
+}
+nav:last of type a {
+	padding: 0 2rem;
 }
 nav:last-of-type li:first-of-type, nav:last-of-type li:first-of-type a {
 	color: rgb(255,255,255);
 }
-
-
-
-
-
+nav:last-of-type a:after {
+	content: '';
+	position: relative;
+	display: block;
+	width: 0;
+	height: 2px;
+	top: -2px;
+	left: 50%;
+	background-color: rgb(255, 255, 255);
+	transition: all 200ms ease;
+}
+nav:last-of-type li:nth-of-type(2) a:after {
+	background-color: rgb(60, 160, 240);
+}
+nav:last-of-type a:hover:after {
+	width: 100%;
+	left: 0%;
+}
 
 
 
