@@ -1,5 +1,13 @@
 
 /********/
+/* var */
+/********/
+
+:root {
+  --main-blue-color: rgb(60,160,240);
+}
+
+/********/
 /* INIT */
 /********/
 
@@ -91,7 +99,7 @@ body>div span, body>div span:before, body>div span:after {
 	height: 0rem;
 	margin: 0.25rem;
 	border-radius: 0.2rem;
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 	animation: loader 0.3s ease-in-out infinite alternate;
 }
 body>div span:nth-of-type(2) {
@@ -276,7 +284,7 @@ li ul li {
 	display: block;
 }
 nav ul a:focus {
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 	color: rgb(255,255,255);
 }
 nav ul a:after {
@@ -287,7 +295,7 @@ nav ul a:after {
 	height: 2px;
 	top: -2px;
 	left: 50%;
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 	transition: all 200ms ease;
 }
 nav ul a:focus:after {
@@ -398,8 +406,8 @@ form button {
 }
 button:hover, button:focus, nav form a:hover:before, nav form a:focus:before {
 	cursor: pointer;
-	background-color: rgb(60, 160, 240);
-	border-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
+	border-color: var(--main-blue-color);
 	color: rgb(255,255,255) !important;
 }
 @media screen and (max-width: 800px) {
@@ -447,21 +455,21 @@ nav input, textarea {
 	transition: all 150ms ease;
 }
 nav input:hover, textarea:hover {
-	border-color: rgb(60, 160, 240);
-	box-shadow: 0 0 0 1px rgb(60, 160, 240);
-	transform: scaleY(1.1);
+	border-color: var(--main-blue-color);
+	box-shadow: 0 0 0 1px var(--main-blue-color);
+	/*transform: scaleY(1.1);*/
 }
-nav input:active, textarea:active {
+/*nav input:active, textarea:active {
 	transform: scaleY(1);
-}
+}*/
 nav input[type="checkbox"] {
 	border-color: transparent;
 	box-shadow: 0 0 0 0 transparent;
 }
 nav input:focus, textarea:focus {
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 	color: rgb(255,255,255);
-	border-color: rgb(60, 160, 240);
+	border-color: var(--main-blue-color);
 	font-weight: 400 !important;
 }
 nav input:nth-of-type(2):focus + a:before {
@@ -491,8 +499,8 @@ nav input:last-of-type:after {
 nav input:last-of-type:checked:after {
 	content: '\2713';
 	line-height: 1rem;
-	background-color: rgb(60, 160, 240);
-	border-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
+	border-color: var(--main-blue-color);
 }
 nav input:last-of-type:focus, nav input:last-of-type:hover {
 	outline: 0 !important;
@@ -500,9 +508,9 @@ nav input:last-of-type:focus, nav input:last-of-type:hover {
 }
 nav input:focus:after, nav input:hover:after {
 	color: rgb(255,255,255);
-	border-color: rgb(60, 160, 240);
+	border-color: var(--main-blue-color);
 	font-weight: 400 !important;
-	box-shadow: 0 0 0 1px rgb(60, 160, 240);
+	box-shadow: 0 0 0 1px var(--main-blue-color);
 }
 
 /***************/
@@ -598,7 +606,7 @@ section a:before {
 	width: 0;
 	left: 50%;
 	height: 3px;
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 	transition: width 250ms ease, left 250ms ease;
 }
 section article:focus-within a:before, section a:hover:before {
@@ -741,7 +749,7 @@ body>ol li {
 	position: relative;
 	width: 47.5%;
 	padding: 1rem;
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 	border-radius: 0.5rem;
 	transition: transform 200ms ease-out 50ms, box-shadow 200ms ease-out 50ms, width 300ms ease;
 	box-shadow: 0 0 0px rgba(0,0,0,0);
@@ -774,7 +782,7 @@ body>ol li:after {
 }
 body>ol li:nth-of-type(odd):after {
 	left: -0.5rem;
-	border-right: 0.5rem solid rgb(60, 160, 240);
+	border-right: 0.5rem solid var(--main-blue-color);
 	border-top: 0.5rem solid transparent;
   	border-bottom: 0.5rem solid transparent;
 }
@@ -876,14 +884,14 @@ progress[value]::-webkit-progress-value {
 	    -webkit-linear-gradient(left, rgb(60,160,240), rgb(200,160,240));
     border-radius: 2px;
     background-size: 35px 2rem, 100% 100%, 100% 100%;
-	animation: progressAnim 0.5s ease infinite 1s;
+	animation: progressAnim 1s ease infinite 2s;
 
 }
-@keyframes progressAnim {
+/*@keyframes progressAnim {
     to {
     	background: linear-gradient( 180deg, rgb(60,160,240) 50%, rgb(200,160,240) 100%); 
     }
-}
+}*/
 nav:last-of-type ol {
 	display: flex;
 	justify-content: space-around;
@@ -908,7 +916,7 @@ nav:last-of-type a:after {
 	transition: all 200ms ease;
 }
 nav:last-of-type li:nth-of-type(2) a:after {
-	background-color: rgb(60, 160, 240);
+	background-color: var(--main-blue-color);
 }
 nav:last-of-type a:hover:after {
 	width: 100%;
