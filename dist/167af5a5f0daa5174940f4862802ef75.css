@@ -55,7 +55,7 @@ CSS Styling standard:
     --transform-value: -100%;
     --animation-duration: .6s;
     --animation-ease: ease-in;
-    --animation-ease: cubic-bezier(.75,.39,.89,.7);
+    --animation-ease: cubic-bezier(.51,.04,.83,.67);
 
     --width: 100vw;
     --height: 100vh;
