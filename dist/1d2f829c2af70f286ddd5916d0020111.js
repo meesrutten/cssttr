@@ -94,7 +94,7 @@ require = (function (modules, cache, entry) {
 
 	window.addEventListener('keydown', checkKey)
 })()
-},{}],9:[function(require,module,exports) {
+},{}],8:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -114,7 +114,7 @@ module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
-  var ws = new WebSocket('ws://' + hostname + ':' + '63414' + '/');
+  var ws = new WebSocket('ws://' + hostname + ':' + '65182' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -215,5 +215,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[9,4])
+},{}]},{},[8,4])
 //# sourceMappingURL=/dist/1d2f829c2af70f286ddd5916d0020111.map

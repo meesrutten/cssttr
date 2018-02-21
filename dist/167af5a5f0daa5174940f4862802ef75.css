@@ -55,6 +55,7 @@ CSS Styling standard:
     --transform-value: -100%;
     --animation-duration: .6s;
     --animation-ease: ease-in;
+    --animation-ease: cubic-bezier(.75,.39,.89,.7);
 
     --width: 100vw;
     --height: 100vh;
@@ -287,12 +288,16 @@ main > *:focus-within {
     color: #FFF;
 
     border: 0;
-    border-bottom: .2rem solid var(--color-button-shadow);
+    border-bottom: .25rem solid var(--color-button-shadow);
     border-radius: .25rem;
 
     user-select: none;
+    cursor: pointer;
 
     transition: all 200ms ease-out;
+}
+[type="submit"]:hover {
+    border: 0 !important;
 }
 
 button:target {
@@ -369,6 +374,35 @@ form:valid [type="submit"] {
     display: inline-flex;
 }
 
+input[type="checkbox"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+}
+input[type="checkbox"] + label {
+    padding: .3em .5em;
+
+    text-align: center;
+
+    background-color: #ccc;
+    
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .25rem;
+
+    cursor: pointer;
+    
+    transition: background-color 100ms ease-out;
+}
+input[type="checkbox"] + label:hover {
+    background-color: #aaa;
+}
+
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:active + label {
+    border: 1px solid rgb(64, 175, 64);
+
+    background-color: rgb(64, 175, 64);
+    color: #fff;
+}
 /***************\
 *
 *   MAIN NAV
@@ -377,6 +411,7 @@ form:valid [type="submit"] {
 
 main nav:first-of-type ul li {
     list-style-type: none;
+    max-width: fit-content;
 }
 
 /***************\
@@ -442,7 +477,6 @@ main nav:nth-of-type(2) ol li:last-of-type {
 }
 
 main nav:nth-of-type(2) ol li a{
-    /* text-decoration: none; */
     color: #000;
 }
 
@@ -480,7 +514,6 @@ fieldset label svg{
 }
 
 fieldset input {
-    /* display: none; */
     opacity: 0;
     width: 0;
     height: 0;
@@ -490,16 +523,41 @@ fieldset input:checked + label svg{
     transform: rotate(720deg) scale(1.5);
 }
 
-/* Skips underline in Chrome 64+ */
+/* Links */
+
 a:link {
     -webkit-text-decoration-skip-ink: auto;
     color: var(--color-link);
+    max-width: fit-content;
 }
+
+a:link::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: .2em;
+
+    position: relative;
+    bottom: 0;
+
+    background-color: var(--color-link);
+
+    transform-origin: 20% 0;
+    transform: scaleX(0);
+    background-color: #1bd3c0;
+    transition: transform 150ms ease-out, background-color 800ms ease-out;
+}
+
+a:link:hover::after {
+    background-color: var(--color-link);
+    transform: scaleX(1);
+}
+
 a:visited {
     color: var(--color-link);
 }
 
-/*  */
+/* Keyframes for the initial animation  */
 
 @keyframes show {
     from {
@@ -529,6 +587,32 @@ a:visited {
     }
 }
 
+/* Adding all animations to initial animation */
+[data-animation*='first'] div:first-child, 
+[data-animation*='first'] div:last-child, 
+[data-animation*='second'] div:first-child, 
+[data-animation*='second'] div:last-child, 
+[data-animation*='third'] div:first-child, 
+[data-animation*='third'] div:last-child {
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-duration: var(--animation-duration);
+    animation-timing-function: var(--animation-ease);
+}
+
+[data-animation*='first'] div:first-child, 
+[data-animation*='first'] div:last-child, 
+[data-animation*='third'] div:first-child, 
+[data-animation*='third'] div:last-child {
+    animation-name: initialAnimation-horizontal;
+}
+
+[data-animation*='second'] div:first-child, 
+[data-animation*='second'] div:last-child {
+    animation-name: initialAnimation-vertical;
+}
+
+
 [data-animation] div:first-child, [data-animation] div:last-child {
     position: fixed;
 
@@ -555,7 +639,7 @@ a:visited {
     border: none;
     border-right: .25em solid #a90329;
 
-    animation: var(--animation-duration) var(--animation-ease) var(--animation-duration) 1 forwards initialAnimation-horizontal;
+    animation-delay: var(--animation-duration);
 }
 [data-animation*='first'] div:last-child {
     right: 0;
@@ -563,8 +647,9 @@ a:visited {
     border: none;
     border-left: .25em solid #a90329;
 
+    /* Changes transform value inside the keyframe effect */
     --transform-value: 100%;
-    animation: var(--animation-duration) var(--animation-ease) var(--animation-duration) 1 forwards initialAnimation-horizontal;
+    animation-delay: var(--animation-duration);
 }
 
 [data-animation*='second'] div:first-child, [data-animation*='second'] div:last-child {
@@ -579,13 +664,13 @@ a:visited {
 [data-animation*='second'] div:first-child {
     top: 0;
     
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 2) 1 forwards initialAnimation-vertical;
+    animation-delay: calc(var(--animation-duration) * 2);
 }
 [data-animation*='second'] div:last-child {
     bottom: 0;
 
     --transform-value: 100%;
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 2) 1 forwards initialAnimation-vertical;
+    animation-delay: calc(var(--animation-duration) * 2);
 }
 
 [data-animation*='third'] div:first-child, [data-animation*='third'] div:last-child {
@@ -608,7 +693,7 @@ a:visited {
 
     background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0) 49.9%,hsla(0,0%,40%,1) 1%, hsla(0,0%,50%,1) 50%);
 
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 3) 1 forwards initialAnimation-horizontal;
+    animation-delay: calc(var(--animation-duration) * 3);
 }
 [data-animation*='third'] div:last-child {
     right: 0;
@@ -617,7 +702,7 @@ a:visited {
     background-image: linear-gradient(-45deg, hsla(0,0%,50%,1) 49.9%, hsla(0,0%,40%,1) 1%,  rgba(0, 0, 0, 0) 50%);
 
     --transform-value: 100%;
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 3) 1 forwards initialAnimation-horizontal;
+    animation-delay: calc(var(--animation-duration) * 3);
 }
 
 a[href*=".html"] {
@@ -628,23 +713,29 @@ a[href*=".html"] {
 main > * {
     opacity: 0;
     transform: translateY(-1em);
+
+    animation-name: show;
+    animation-duration: var(--animation-duration);
+    animation-timing-function: var(--animation-ease);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 main > :nth-child(1) {
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 5.25) 1 forwards show;
+    animation-delay: calc(var(--animation-duration) * 5.25);
 }
 main > :nth-child(2) {
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 5) 1 forwards show;
+    animation-delay: calc(var(--animation-duration) * 5);
 }
 main > :nth-child(3) {
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4.75) 1 forwards show;
+    animation-delay: calc(var(--animation-duration) * 4.75);
 }
 main > :nth-child(4) {
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4.5) 1 forwards show;
+    animation-delay: calc(var(--animation-duration) * 4.5);
 }
 main > :nth-child(5) {
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4.25) 1 forwards show;
+    animation-delay: calc(var(--animation-duration) * 4.25);
 }
 main > :nth-child(6) {
-    animation: var(--animation-duration) var(--animation-ease) calc(var(--animation-duration) * 4) 1 forwards show;
+    animation-delay: calc(var(--animation-duration) * 4);
 }
