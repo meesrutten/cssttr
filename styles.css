@@ -320,6 +320,11 @@ nav:first-of-type:after {
 	font-size: 1.2em;
 	padding: 0 1rem;
 }
+@media screen and (max-width: 500px) {
+	nav:first-of-type:after {
+		display: none
+	}
+}
 nav:first-of-type:hover:after {
 	cursor: pointer;
 }
