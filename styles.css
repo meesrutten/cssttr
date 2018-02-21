@@ -101,10 +101,11 @@ body>div div {
 body>div span, body>div span:before, body>div span:after {
 	display: inline-block;
 	width: 0.75rem;
-	height: 0rem;
-	margin: 0.25rem;
-	border-radius: 0.2rem;
+	height: 2rem;
+	margin: 0.3rem;
+	border-radius: 0.1rem;
 	background-color: var(--main-blue-color);
+	transform-origin: center 82.5%;
 	animation: loader 0.3s ease-in-out infinite alternate;
 }
 body>div span:nth-of-type(2) {
@@ -115,13 +116,10 @@ body>div span:nth-of-type(3) {
 }
 @keyframes loader {
     from { 
-    	height: 0.5rem; 
-    	width: 0.75rem;
+    	transform: scaleX(1) scaleY(1);
     }
     to {
-    	margin-bottom: -0.25rem;
-    	height: 3rem;
-    	width: 1rem;
+    	transform: scaleX(1.25) scaleY(2);
     }
 }
 
@@ -470,7 +468,7 @@ nav input, textarea {
 }
 nav input:hover, textarea:hover {
 	border-color: var(--main-blue-color);
-	box-shadow: 0 0 0 1px var(--main-blue-color);
+	box-shadow: 0 0 1px 1px var(--main-blue-color);
 }
 nav input[type="checkbox"] {
 	border-color: transparent;
@@ -520,7 +518,7 @@ nav input:focus:after, nav input:hover:after {
 	color: rgb(255,255,255);
 	border-color: var(--main-blue-color);
 	font-weight: 400 !important;
-	box-shadow: 0 0 0 1px var(--main-blue-color);
+	box-shadow: 0 0 1px 1px var(--main-blue-color);
 }
 
 /***************/
