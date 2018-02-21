@@ -320,11 +320,6 @@ nav:first-of-type:after {
 	font-size: 1.2em;
 	padding: 0 1rem;
 }
-@media screen and (max-width: 500px) {
-	nav:first-of-type:after {
-		display: none
-	}
-}
 nav:first-of-type:hover:after {
 	cursor: pointer;
 }
@@ -532,7 +527,7 @@ em {
 }
 section {
 	display: grid;
-	grid-template-columns: repeat(auto-fill,minmax(30em, 1fr));
+	grid-template-columns: repeat(auto-fill,minmax(33em, 1fr));
 	grid-gap: 1rem;
 }
 section>article:nth-of-type(1), section>article:nth-of-type(4) {
