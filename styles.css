@@ -31,7 +31,11 @@ body {
 	font-family: 'Ubuntu';
 	-webkit-font-smoothing: antialiased;
 }
-body>ol, body>form, body>fieldset, body>nav:last-of-type, section {
+body>ol, body>form, body>fieldset, section {
+	padding: 15vh 10%;
+	background-color: rgb(255,255,255);
+}
+body>nav:last-of-type {
 	padding: 15vh 10%;
 }
 :focus {
@@ -146,6 +150,8 @@ article figure {
 	left: 0;
 	top: 0;
 	z-index: -1;
+	background-attachment: fixed;
+	background-size: cover;
 }
 article figcaption {
 	display: flex;
@@ -157,24 +163,23 @@ article figcaption {
 	width: 50vw;
 	padding-bottom: 5%;
 }
-article figure img {
-	position: absolute;
+/*article figure img {
+	position: relative;
 	width: 100%;
 	height: 100vh;
 	object-fit: cover;
 	object-position: center;
-}
+}*/
 article figure img:first-of-type {
 	opacity: 0;
-	transition: all 400ms ease;
-	z-index: 1;
+	transition: all 300ms ease;
 }
 article figure img:last-of-type {
 	filter: blur(0.3rem);
 }
 body>article h1, article figcaption p, article footer, article time, article figcaption a {
 	color: rgb(255,255,255);
-	transition: all 400ms ease;
+	transition: all 300ms ease;
 }
 article footer, article time, article figcaption a, label {
 	font-size: 1.1em;
@@ -216,24 +221,24 @@ figcaption a:hover:after, figcaption a:focus:after {
 	article footer:before, figcaption a:after {
 		background-color: rgb(60,60,60);
 	}
-	article figure>img:first-of-type {
+	/*article figure>img:first-of-type {
 		opacity: 0;
-	}
-	/*body>article figure:last-of-type {
+	}*/
+	body>article figure:last-of-type {
 		background-image: url('img/wintersport.jpg');
 		filter: blur(0.25rem);
-	}*/
+	}
 	article figcaption {
 		width: 100%;
 	}
 }
 @media screen and (orientation:landscape) {
-	article figure>img:first-of-type {
+	/*article figure>img:first-of-type {
 		opacity: 1;
-	}
-	/*body>article figure:first-of-type {
-		background-image: url('img/surf.jpg');
 	}*/
+	body>article figure:first-of-type {
+		background-image: url('img/surf.jpg');
+	}
 }
 
 
